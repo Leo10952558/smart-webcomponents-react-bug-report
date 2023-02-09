@@ -1,0 +1,34 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app.a845814c.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "node_modules/web-vitals/dist/web-vitals.js",
+      "lang/php_en.json",
+      "lang/php_ja.json"
+    ],
+    "css": [
+      "assets/app.28db8bcd.css"
+    ]
+  },
+  "lang/php_en.json": {
+    "file": "assets/php_en.d35b5e3b.js",
+    "src": "lang/php_en.json",
+    "isDynamicEntry": true
+  },
+  "lang/php_ja.json": {
+    "file": "assets/php_ja.95a8a04c.js",
+    "src": "lang/php_ja.json",
+    "isDynamicEntry": true
+  },
+  "node_modules/web-vitals/dist/web-vitals.js": {
+    "file": "assets/web-vitals.89c7231a.js",
+    "src": "node_modules/web-vitals/dist/web-vitals.js",
+    "isDynamicEntry": true
+  },
+  "resources/js/app.css": {
+    "file": "assets/app.28db8bcd.css",
+    "src": "resources/js/app.css"
+  }
+}

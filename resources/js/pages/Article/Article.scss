@@ -58,19 +58,13 @@
   }
 }
 
-#add_submit_btn {
-  position: absolute;
-  top: 66px;
-  padding-left: 12px;
-  z-index: 101;
-  display: flex;
-  justify-content: center;
-}
-
 .budget_add_submit_btn {
   color: #007bff;
   font-size: 26px;
+  position: absolute;
+  top: 66px;
   z-index: 101;
+  padding-left: 12px;
   &:hover {
     color: #0069d9;
   }
@@ -120,15 +114,3 @@
 //   top: 66px;
 //   margin: 0 12px;
 // }
-
-.smart-table-container tr th > .wrapper {
-  justify-content: center;
-
-  .column-menu {
-    right: -6px;
-  }
-}
-
-.m-t-15 {
-  margin-top: 15px;
-}

@@ -4,25 +4,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useProSidebar } from 'react-pro-sidebar';
 import { BsKey } from "react-icons/bs";
 import { SlLock, SlUser, SlLogout } from "react-icons/sl";
-import { FiMaximize, FiMinimize, FiSettings, FiLogOut, FiUser, FiTrendingUp } from "react-icons/fi";
+import { FiMaximize, FiMinimize, FiSettings, FiLogOut, FiUser } from "react-icons/fi";
 
 import styles from './Header.module.scss';
 
-import {
-  startAction,
-  endAction,
-  showToast
-} from '../../actions/common'
-import {
-  login,
-  logout
-} from '../../actions/auth'
-import { useResize, checkMobileDevice } from "../../utils/Helper"
-import agent from '../../api/'
+import {logout} from './../../actions/auth'
 
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-const Header = (props) => {
+const Header = () => {
   const { t, tChoice } = useLaravelReactI18n();
 
   const dispatch = useDispatch()
@@ -33,8 +23,6 @@ const Header = (props) => {
 
   const [showUserBox, setShowUserBox] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
-
-  const { isMobile } = useResize()
 
   const  goInFullscreen = (el) => {
     if(el.requestFullscreen)
@@ -69,42 +57,15 @@ const Header = (props) => {
     }
   }
 
-  const submitLogout = async() => {
-    dispatch(startAction())
-		const res = await agent.auth.logout()
-		if (res.data.success) {
-      dispatch(showToast('success', res.data.message))
-      localStorage.removeItem('token')
-      dispatch(logout())
+  const submitLogout = () => {
+    localStorage.removeItem('token')
+    dispatch(logout()).then(() => {
       navigate("/")
-    } else dispatch(showToast('error', res.data.message))
-		dispatch(endAction())
+    })
   }
 
   return (
     <header style={{marginLeft: 0, width: '100%'}} className="navbar pcoded-header navbar-expand-lg header-default">
-      {
-        isMobile && 
-        <div className={`collapse navbar-collapse ${styles.mobile_header}`}>
-          <ul className="navbar-nav mr-auto">
-            <li className={styles.left_container}>
-              <div className={styles.bg_trendingup}>
-                <FiTrendingUp />
-              </div>
-              <div className={styles.payment_text}>
-                Payment
-              </div>
-            </li>
-          </ul>
-          <ul className={`navbar-nav ml-auto ${styles.right_btn}`}>
-            <li className={styles.right_container}>
-              <div className="drp-user dropdown">
-                <div className={`${styles.mobile_menu} ${(props.clickedMobileMenu ? styles.on : '')}`} onClick={() => toggleSidebar()}><span></span></div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      }
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li>
@@ -128,8 +89,8 @@ const Header = (props) => {
                       <a className="dud-logout" title="Logout" onClick={() => submitLogout()}><FiLogOut/></a>
                     </div>
                     <ul className="pro-body">
-                      <li><Link className='dropdown-item' to={'/profile'} onClick={() => setShowUserBox(false)}><FiUser />&nbsp;&nbsp;&nbsp;&nbsp;{ t('Profile') }</Link></li>
-                      <li><Link className='dropdown-item' to={'/changePassword'} onClick={() => setShowUserBox(false)}><BsKey />&nbsp;&nbsp;&nbsp;&nbsp;{ t('Change Password') }</Link></li>
+                      <li><Link className='dropdown-item' to={'/profile'}><FiUser />&nbsp;&nbsp;&nbsp;&nbsp;{ t('Profile') }</Link></li>
+                      <li><Link className='dropdown-item' to={'/profile'}><BsKey />&nbsp;&nbsp;&nbsp;&nbsp;{ t('Change Password') }</Link></li>
                     </ul>
                   </div>
               }

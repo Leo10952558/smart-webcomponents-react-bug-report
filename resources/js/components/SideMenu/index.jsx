@@ -1,24 +1,14 @@
-import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar';
-import { Icon } from "icon-picker-react";
-import { FaHome, FaRegBuilding, FaGavel, FaYenSign, FaRegClone, FaUniversity, FaCog, FaUsers, FaHistory } from "react-icons/fa";
-import {BsMenuButtonWideFill} from "react-icons/bs"
+import { FaHome, FaRegBuilding, FaGavel, FaYenSign, FaRegClone, FaUniversity, FaCog, FaUsers } from "react-icons/fa";
 import {FiTrendingUp} from "react-icons/fi"
 import styled from 'styled-components';
 
 import styles from "./SideMenu.module.scss"
 import { useResize, checkMobileDevice } from "./../../utils/Helper"
-import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-import {
-  startAction,
-  endAction,
-  showToast
-} from '../../actions/common'
-import { logout } from "../../actions/auth";
-import agent from '../../api/'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
 
 const StyledSidebar = styled(Sidebar)`
   height: 100vh;
@@ -26,7 +16,6 @@ const StyledSidebar = styled(Sidebar)`
   border: none!important;
 
   &.ps-broken {
-    z-index: 1029 !important;
     &>div {
       box-shadow: none;
     }
@@ -113,7 +102,7 @@ const StyledSubMenu = styled(SubMenu)`
     }
   }
   &>a:hover {
-    background: transparent!important;
+    background: transparent;
     color: #1dc4e9;
   }
   &>div {
@@ -129,7 +118,7 @@ const StyledTopMenuItem = styled(MenuItem)`
   }
 
   &>a:hover {
-    background: transparent!important;
+    background: transparent;
     color: #fff;
   }
 
@@ -171,119 +160,20 @@ const StyledMenuItem = styled(MenuItem)`
   }
 
   &>a:hover {
-    background: transparent!important;
+    background: transparent;
     color: #1dc4e9;
   }
 `;
 
-
-let renderedMenu
-const SideMenu = forwardRef((props, ref) => {
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+const SideMenu = () => {
+  const { t, tChoice } = useLaravelReactI18n();
 
   const sidebarRef = useRef(null);
 
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = useProSidebar();
   const { isMobile } = useResize()
-  const { t, tChoice } = useLaravelReactI18n();
 
-  const [menus, setMenus] = useState([])
-
-  useImperativeHandle(ref, () => ({
-    clickMobileMenu() {
-      collapseSidebar(!props.clickedMobileMenu)
-      props.setClickedMobileMenu((old) => !old)
-    }
-  }));
-
-  // useEffect(() => {
-  //   getMenuData()
-  // }, [])
-
-  // const getMenuData = async() => {
-  //   dispatch(startAction())
-  //   try {
-  //     const res = await agent.common.getMenus()
-  //     if(res.data.success) {
-  //       let source = makeMenuSource(res.data.data)
-  //       console.log('source=', source)
-  //       setMenus([...source])
-  //     }
-  //     dispatch(endAction())
-  //   } catch (error) {
-  //     if (error.response.status >= 400 && error.response.status <= 500) {
-  //       dispatch(endAction())
-  //       dispatch(showToast('error', error.response.data.message))
-  //       if (error.response.data.message == 'Unauthorized') {
-  //         localStorage.removeItem('token')
-  //         dispatch(logout())
-  //         navigate('/')
-  //       }
-  //     }
-  //   }
-  // }
-
-  // const makeRenderedMenu = (source) => {
-  //   source.map((el) => {
-  //     if(el.items != undefined && el.items != null) {
-  //       const icon = el.icon != null ? <Icon icon={el.icon}/> : ''
-  //       const component = el.route_url != null && el.route_url != '' ? <Link to={el.route_url} /> : ''
-  //       return (
-  //         <StyledSubMenu icon={icon} component={component} label={el.name}>
-  //         {() => makeRenderedMenu(el.items)}
-  //         </StyledSubMenu>
-  //       )
-  //     } else {
-  //       const icon = el.icon != null ? <Icon icon={el.icon}/> : ''
-  //       const component = el.route_url != null && el.route_url != '' ? <Link to={el.route_url} /> : ''
-  //       return <StyledMenuItem icon={icon} component={component}>{el.name}</StyledMenuItem>
-  //     }
-  //   })
-  // }
-
-  // const makeMenuSource = (data) => {
-  //   let menuDataSource = []
-  //   data.map((m) => {
-  //     if(m.parent_menu_id == 0) {
-  //       menuDataSource.push({
-  //         ...m
-  //       })
-  //     }
-  //   })
-  //   menuDataSource.sort((a, b) => {
-  //     return a.menu_order - b.menu_order
-  //   })
-
-  //   data.map((m) => {
-  //     if(m.parent_menu_id != 0) {
-  //       insertMenuItem(menuDataSource, m)
-  //     }
-  //   })
-  //   return menuDataSource
-  // }
-
-  // const insertMenuItem = (menuArray, menuItem) => {
-  //   menuArray.map((menu, idx) => {
-  //     if(menu.id == menuItem.parent_menu_id) {
-  //       if(menuArray[idx].items == undefined || menuArray[idx].items == null) {
-  //         menuArray[idx]['items'] = new Array()
-  //       }
-  //       menuArray[idx].items.push({
-  //         ...menuItem
-  //       })
-  //       menuArray[idx].items.sort((a, b) => {
-  //         return a.menu_order - b.menu_order
-  //       })
-  //       return
-  //     }
-  //     if(menu.items != undefined && menu.items != null) {
-  //       insertMenuItem(menu.items, menuItem)
-  //     }
-  //   })
-  //   return
-  // }
+  const [clickedMobileMenu, setClickedMobileMenu] = useState(false);
 
   const toggle = () => {
     // toggleSidebar();
@@ -296,26 +186,26 @@ const SideMenu = forwardRef((props, ref) => {
     }
   };
 
-  // const clickMobileMenu = () => {
-  //   props.setClickedMobileMenu((old) => !old)
-  //   collapseSidebar(!props.clickedMobileMenu)
-  // }
+  const clickMobileMenu = () => {
+    setClickedMobileMenu((old) => !old)
+    collapseSidebar(!clickedMobileMenu)
+  }
 
   const sidebarMouseEnter = () => {
-    if(props.clickedMobileMenu && collapsed) {
+    if(clickedMobileMenu && collapsed) {
       collapseSidebar()
     }
   }
 
   const sidebarMouseLeave = () => {
-    if(props.clickedMobileMenu && !collapsed) {
+    if(clickedMobileMenu && !collapsed) {
       collapseSidebar()
     }
   }
 
   const sidebarClick = () => {
     if(checkMobileDevice()) {
-      if(props.clickedMobileMenu && collapsed) {
+      if(clickedMobileMenu && collapsed) {
         collapseSidebar()
       }
     }
@@ -334,7 +224,7 @@ const SideMenu = forwardRef((props, ref) => {
         onMouseLeave={() => sidebarMouseLeave()}
         onClick={() => sidebarClick()}
       >
-        <Menu id="menu">
+        <Menu>
           {
             !isMobile &&
               <StyledTopMenuItem
@@ -344,38 +234,34 @@ const SideMenu = forwardRef((props, ref) => {
                   <span className={styles.b_text}>{ t('Payment') }</span>
                   {
                     !collapsed &&
-                      <div className={`${styles.mobile_menu} ${(props.clickedMobileMenu ? styles.on : '')}`} onClick={() => ref.current.clickMobileMenu()}><span></span></div>
+                      <div className={`${styles.mobile_menu} ${(clickedMobileMenu ? styles.on : '')}`} onClick={() => clickMobileMenu()}><span></span></div>
                   }
                 </div>
               </StyledTopMenuItem>
           }
-          {/* {
-            () => makeRenderedMenu(menus)
-          } */}
           <StyledMenuItem icon={<FaHome/>} component={<Link to="/article" />}>{ t('Object Management') }</StyledMenuItem>
-          <StyledMenuItem icon={<FaRegBuilding />} component={<Link to="/company" />}>{ t('Vendor Management') }</StyledMenuItem>
+          <StyledMenuItem icon={<FaRegBuilding />}>{ t('Vendor Management') }</StyledMenuItem>
           <StyledSubMenu icon={<FaGavel />} label={ t('Construction Management') }>
-            <StyledMenuItem component={<Link to="/construction/1" />}>{ t('Housing construction list') }</StyledMenuItem>
-            <StyledMenuItem component={<Link to="/construction/0" />}>{ t('Building construction list') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Housing construction list') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Building construction list') }</StyledMenuItem>
           </StyledSubMenu>
           <StyledSubMenu icon={<FaYenSign />} label={ t('Input Management') }>
-            <StyledMenuItem component={<Link to="/payment" />}>{ t('Input confirmation') }</StyledMenuItem>
-            <StyledMenuItem component={<Link to="/transfer" />}>{ t('Payment confirmation') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Input confirmation') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Payment confirmation') }</StyledMenuItem>
           </StyledSubMenu>
           <StyledSubMenu icon={<FaRegClone />} label={ t('Summing') }>
-            <StyledMenuItem component={<Link to="/aggregates/all" />} >{ t('Whole') }</StyledMenuItem>
-            <StyledMenuItem component={<Link to="/aggregates/constructions" />} >{ t('Annual A3') }</StyledMenuItem>
-            <StyledMenuItem component={<Link to="/aggregates/constructions-month" />} >{ t('Monthly A4') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Whole') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Annual A3') }</StyledMenuItem>
+            <StyledMenuItem>{ t('Monthly A4') }</StyledMenuItem>
           </StyledSubMenu>
-          <StyledMenuItem icon={<FaUniversity />} component={<Link to="/zengin" />}>{ t('Bank format output') }</StyledMenuItem>
-          <StyledMenuItem icon={<FaCog />} component={<Link to="/setting" />}>{ t('Setting') }</StyledMenuItem>
+          <StyledMenuItem icon={<FaUniversity />}>{ t('Bank format output') }</StyledMenuItem>
+          <StyledMenuItem icon={<FaCog />}>{ t('Setting') }</StyledMenuItem>
           <StyledMenuItem icon={<FaUsers />} component={<Link to="/users" />}>{ t('User Management') }</StyledMenuItem>
-          <StyledMenuItem icon={<FaHistory />} component={<Link to="/logs" />}>{ t('Log view') }</StyledMenuItem>
-          <StyledMenuItem icon={<BsMenuButtonWideFill />} component={<Link to="/menu" />}>{ t('Menu setting') }</StyledMenuItem>
         </Menu>
       </StyledSidebar>
+      
     </>
   );
-})
+}
 
 export default SideMenu

@@ -3,7 +3,6 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\ConstructionMenuController;
 use App\Http\Controllers\ConstructionsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\RoleController;
@@ -34,8 +33,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.ap
 
 
 Route::middleware('auth:sanctum')->group(function () {
-
-    Route::get('/logout', [AuthController::class, 'logout']);
     Route::apiResource('articles', ArticleController::class);
 });
 

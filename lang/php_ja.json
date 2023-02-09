@@ -3,8 +3,6 @@
     "Annual A3":"工事別 年間 A3",
     "All Items":"全レコード",
     "Account":"口座",
-    "Yes":"はい",
-    "No":"いいえ",
 
     "Bank format output":"全銀フォーマット出力",
     "Basic Information":"基本情報",
@@ -26,7 +24,7 @@
     "Contract Amount":"契約金額",
     "Construction":"工事",
     "Construction Name":"工事名",
-    "Continue to Register":"続けて物件を登録",
+    "Continue to Register":"続けて同物件を登録",
     "Cost":"金額",
     "Create":"作成",
     "Created User":"作成者",
@@ -57,7 +55,7 @@
     "List":"一覧",
     "Login":"ログイン",
     
-    "Monthly A4":"工事別 月 A4",
+    "Monthly A4":"工事別 月 A3",
     
     "Non-display":"非表示",
     
@@ -65,10 +63,9 @@
     "Payment confirmation":"支払確認",
     "Payment management system":"支払い管理システム",
     "Payment":"支払管理",
-    "Please enter in halfwidth katakana":"半角カタカナで入力してください",
+    "Please enter in Japanese":"半角カタカナで入力してください",
     "Profile":"プロフィール",
     
-    "Object":"物件",
     "Object Management":"物件管理",
     "Object List":"物件一覧",
     "Object ID":"物件ID",
@@ -89,10 +86,10 @@
     "Sign up":"サインアップ",
     "Setting":"設定",
     "Status":"状態",
-    "Show hidden properties":"非表示項目を表示する",
+    "Show hidden properties":"非表示物件を表示する",
     "Summing":"集計",
     
-    "Type":"種類",
+    "Type":"種別",
     "Total":"合計",
     "Transfer Bank":"振込銀行",
     "Transfer fee":"振込手数料",
@@ -108,69 +105,6 @@
     "Vendor ID":"業者ID",
     "Vendor Name":"業者名",
     "Vendor Management":"業者管理",
-    "Selfpay":"自社払い",
-
-    "Time":"日付",
-    "UserName":"ユーザー名",
-    "TableName":"テーブル名",
-    "RecordId":"記録ID",
-
-    "Update":"更新",
-
-    "Created":"追加",
-    "Updated":"更新",
-    "Deleted":"削除",
-    "Export":"エクスポート",
- 
-    "Extraction condition":"抽出条件",
-    "Target date":"対象日付",
-    "Designated transfer date":"振込指定日",
-    "Download":"ダウンロード",
-    "Please confirm the details of the extraction process.":"抽出処理の内容を確認してください。",
-    "Go to payment confirmation":"支払確認へ移動",
-    "Continue without extraction":"抽出せずに続行",
-    
-    "Extract":"抽出",
-    "Money carried forward from the previous month":"前月繰越金",
-    "Amount paid this month":"今月支払金額",
-    "Total payment for this month":"今月支払計",
-    "Safety fee/discount":"安全会費/値引",
-    "Bill":"手形",
-    "Transfer amount of money":"振込金額",
-    "Balance of the month":"今月残金",
- 
-    "Overall tally":"全体集計",
-    "Total Payment":"合計金額",
-
-    "Setting information":"設定情報",
-    "Consignor code":"委託者コード",
-    "Client name":"依頼人名",
-    "Bank code":"銀行コード",
-    "Bank name":"銀行名",
-    "Branch code":"支店コード",
-    "Branch name":"支店名",
-    "Account type":"口座種別",
-    "Savings Account":"普通口座",
-    "Current Account":"当座口座",
-    "Other Account":"その他",
-    "Account number":"口座番号",
-    "Fiscal year":"決算期",
-    "Transfer fee same branch ¥30,000 or less":"振込手数料 同行同支店¥30,000未満",
-    "Transfer fee same branch ¥30,000 or more":"振込手数料 同行同支店¥30,000以上 ",
-    "Transfer fee other branch ¥30,000 or less":"振込手数料 同行他支店¥30,000未満",
-    "Transfer fee other branch ¥30,000 or more":"振込手数料 同行他支店¥30,000以上",
-    "Transfer fee other bank ¥30,000 or less":"振込手数料 他行¥30,000未満 ",
-    "Transfer fee other bank ¥30,000 or more":"振込手数料 他行¥30,000以上",
-    "Closing date":" 締め日",
-    "Transfer date":"振込日",
-
-    "Log view":"履歴",
-    "Menu setting":"項目編集",
-    "Menu name":"メニュー名",
-    "Parent menu":"親メニュー",
-    "Add after":"後に追加",
-
-    "Manually entered amount information will be cleared. Is it OK?":"手動で入力を行った金額情報がクリアされます。よろしいですか？",
 
     "Whole":"全体"
 }
